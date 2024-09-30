@@ -1,0 +1,18 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(196, 181, 143);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .canvas {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    height: 50%;
+  }
+}

@@ -1,0 +1,5 @@
+@import "./reset.css";
+@font-face {
+  font-family: "carelia-upright";
+  src: url("../assets/fonts/carelia-upright.ttf");
+}
