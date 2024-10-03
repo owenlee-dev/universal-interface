@@ -1,36 +1,25 @@
-$bgColor: #f1f1f1;
-$shadowColor: rgb(180, 180, 180);
-$highlightColor: rgb(255, 255, 255);
+$bgColor: #333;
+$shadowColor: #7a7a7a;
+$highlightColor: rgb(26, 26, 26);
 
 .SondereggerButton {
   font-family: "carelia-upright";
-  color: rgba(51, 51, 51, 0.706);
-  background-color: $bgColor;
-  border: 0;
-  padding: 0.25rem 1.75rem;
-
+  color: rgba(255,255,255,0.6);
+  background-color:$bgColor;
+  border:0;
+  padding:0.25rem 1.75rem;
   border-radius: 4rem;
-  text-shadow: 1px 1px 1px #fff;
-  // light coming from top left to bottom right
-  // outer shadow (bottom right)
-  // inner highlight (top left)
-  box-shadow: 2px 1px 2px rgba($shadowColor, 0.7),
-    inset 3px 2px 5px rgba($highlightColor, 1);
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 2px 1px 2px rgba($shadowColor, 0.7), inset 3px 2px 5px rgba($highlightColor, 1);
   font-size: 1.25rem;
-  transition: all 0.3s ease-in-out 0s;
-
+  transition:all 0.3s ease-in-out 0s;
   &:not(:disabled) {
     cursor: pointer;
   }
   &:hover {
-    color: #8c8c8c;
+    color:white;
     background-color: $bgColor;
-    //light going from bottom right to top left
-    // outer shadow (top left)
-    // inner highlight (bottom right)
-    box-shadow: -2px -1px 2px rgba($shadowColor, 0.3),
-      inset -3px -2px 3px rgba($highlightColor, 0.7);
+  box-shadow: -2px -1px 2px rgba($shadowColor, 0.3), inset -3px -2px 5px rgba($highlightColor, 0.7);
+    
   }
-  // The change of light perspective gives the impression that the button is being pushed in
-  // in the hover state the highlights become stronger and the outer shadow shrinks giving the illusion the button is being pressed
 }
