@@ -1,0 +1,48 @@
+/* src/components/StyledButton/StyledButton.module.scss */
+$yellow: #ffe00b;
+$dark: #151515;
+$light: #fffcd5;
+
+.CoreyDonenfeldButton {
+  background: $light;
+  box-shadow: 4px 4px $yellow, 9px 9px $dark;
+  color: $dark;
+  border: solid 2px $dark;
+  text-decoration: none;
+  padding: 1em 1.5em;
+  display: inline-flex;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  cursor: pointer;
+  overflow: hidden;
+  letter-spacing: 0.05em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 100%;
+    background: $dark;
+    z-index: -1;
+    transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  &:hover::before {
+    width: 100%;
+    left: 0;
+    right: unset;
+  }
+
+  &:hover {
+    box-shadow: 0 0 $yellow, 0 0 $dark;
+    color: $light;
+  }
+}
