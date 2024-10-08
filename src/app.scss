@@ -1,3 +1,4 @@
+@import "./styles/index.scss";
 .App {
   width: 100vw;
   height: 100vh;
@@ -6,8 +7,7 @@
   align-items: center;
   justify-content: center;
   .canvas {
-    // background-color: #f1f1f1;
-    background-color: #ffe00b;
+    background-color: $off-white;
     border-radius: 10px;
     display: flex;
     align-items: center;

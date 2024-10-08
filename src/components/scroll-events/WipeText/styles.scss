@@ -1,0 +1,62 @@
+@import "../../../styles/index.scss";
+
+.WipeText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trigger-button {
+  margin-bottom: 20px;
+  padding: 1em 2em;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: $off-white;
+  border: none;
+  color: $dark-gray;
+  border-radius: 5px;
+  outline: 1px solid $dark-gray;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $dark-gray;
+    color: $off-white;
+  }
+}
+
+.text-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: 5px;
+  .text {
+    position: relative;
+    font-size: 2rem;
+    z-index: 1;
+    color: $black;
+    transition: color 0.5s ease;
+  }
+
+  .overlay-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $off-white;
+    z-index: 2;
+    transition: width 1s linear;
+  }
+
+  &.active .overlay-bar {
+    width: 0%;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 10px;
+      height: 2.5rem;
+      background-color: $black;
+    }
+  }
+}

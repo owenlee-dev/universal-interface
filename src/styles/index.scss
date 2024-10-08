@@ -1,0 +1,10 @@
+@import "./reset.scss";
+@import "./variables.scss";
+@font-face {
+  font-family: "carelia-upright";
+  src: url("../assets/fonts/carelia-upright.ttf");
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
