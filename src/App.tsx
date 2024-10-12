@@ -5,6 +5,7 @@ import "./app.scss";
 import CoreyDonenfeldButton from "./components/buttons/CoreyDonenfeldButton/CoreyDonenfeldButton";
 import WipeText from "./components/scroll-events/WipeText/WipeText";
 import DecodeText from "./components/scroll-events/DecodeText/DecodeText";
+import GlowMouseTracking from "./components/cursor-effects/GlowMouseTracking";
 function App() {
   return (
     <div className="App">
@@ -20,7 +21,8 @@ function App() {
 
         {/* <WipeText text="Hello my name is Owen" /> */}
 
-        <DecodeText text="Hello my name is Owen" />
+        {/* <DecodeText text="Hello my name is Owen" /> */}
+        <GlowMouseTracking />
       </div>
     </div>
   );

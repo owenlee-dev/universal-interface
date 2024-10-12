@@ -1,0 +1,26 @@
+@import "../../styles/index.scss";
+.GlowMouseTracking {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1em;
+  border:1px solid red;
+}
+
+.GlowMouseTracking > div {
+  background-size: cover;
+  background-image: url("https://images.unsplash.com/photo-1589441161120-8781d5644435?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MjEwNDkxMDJ8&ixlib=rb-4.0.3&q=80&w=400");
+
+  background-image: radial-gradient(
+    circle at var(--x) var(--y),
+    hsl(0 0% 100% / 0.5),
+    transparent 200px
+  );
+  /*   background-size: 200px 200px; */
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+  border: 2px solid $off-black;
+}
