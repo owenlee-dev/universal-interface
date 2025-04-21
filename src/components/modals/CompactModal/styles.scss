@@ -1,0 +1,17 @@
+.modal-button-wrapper {
+  .CompactModal {
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    width: 30em;
+    height: 12em;
+  }
+  .accept-btn {
+    padding: 0.25em 1em;
+    font-size: 1.2rem;
+    font-family: "carelia-upright";
+    position: absolute;
+    line-height: 1.4;
+    bottom: 1em;
+  }
+}

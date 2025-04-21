@@ -2,18 +2,23 @@
 .App {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to top left, rgb(177, 149, 99), white);
+  background-color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
   .canvas {
-    background-color: $off-white;
+    height: 100vh;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    height: 50%;
+    width: 100%;
+  }
+
+  .CoreyDonenfeldButton {
+    align-self: flex-end;
+    color: white;
+    padding: 10px;
+    font-size: 2em;
   }
 }

@@ -8,8 +8,9 @@ $light: #fffcd5;
   box-shadow: 4px 4px $yellow, 9px 9px $dark;
   color: $dark;
   border: solid 2px $dark;
+  border: solid 2px $dark;
   text-decoration: none;
-  padding: 1em 1.5em;
+  padding: 0.5em 1em;
   display: inline-flex;
   font-weight: 700;
   position: relative;
@@ -17,15 +18,18 @@ $light: #fffcd5;
   transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   cursor: pointer;
   overflow: hidden;
-  letter-spacing: 0.05em;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "chorine-large", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  background-color: transparent;
+  font-size: 90px;
   display: flex;
   align-items: center;
   gap: 1.5em;
 
   &::before {
-    position: absolute;
     content: "";
+    position: absolute;
     top: 0;
     right: 0;
     width: 0%;
@@ -34,15 +38,12 @@ $light: #fffcd5;
     z-index: -1;
     transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   }
-
-  &:hover::before {
-    width: 100%;
-    left: 0;
-    right: unset;
-  }
-
   &:hover {
     box-shadow: 0 0 $yellow, 0 0 $dark;
     color: $light;
+    &::before {
+      width: 100%;
+      left: 0;
+    }
   }
 }

@@ -1,110 +1,82 @@
-// DecodeText.tsx
-
-import React, { useState, useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./styles.scss";
 
 interface DecodeTextProps {
   text: string;
-  duration?: number; // Total duration of the decoding animation in milliseconds
-  scrambleInterval?: number; // Interval for scrambling characters in milliseconds
 }
+const DecodeText: React.FC<DecodeTextProps> = ({ text }) => {
+  const textRef = useRef<HTMLDivElement>(null);
+  const [displayedText, setDisplayedText] = useState(text); // State to manage current text displayed
+  const [randomOrder, setRandomOrder] = useState<number[]>([]);
 
-const DecodeText: React.FC<DecodeTextProps> = ({
-  text,
-  duration = 2000,
-  scrambleInterval = 50,
-}) => {
-  const [decodedText, setDecodedText] = useState<string[]>(
-    text.split("").map((char) => (char === " " ? " " : ""))
-  );
-  const [isActive, setIsActive] = useState(false);
-  const intervalRefs = useRef([]);
+  useEffect(() => {
+    const originalText = text.split("");
+    const randomChars = originalText.map(() => randChar());
 
-  // Utility function to generate a random character
-  const getRandomChar = () => {
-    const chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return chars.charAt(Math.floor(Math.random() * chars.length));
+    // Generate a random order for the indices
+    const indices = originalText.map((_, idx) => idx);
+    const shuffledIndices = shuffleArray(indices);
+    setRandomOrder(shuffledIndices);
+
+    const handleMouseOver = () => {
+      let resolvedIndices: Set<number> = new Set();
+      const interval = setInterval(() => {
+        if (resolvedIndices.size >= originalText.length) {
+          clearInterval(interval);
+          setDisplayedText(text); // Final text after full animation
+          return;
+        }
+
+        const nextIndex = shuffledIndices[resolvedIndices.size]; // Get next random index
+        resolvedIndices.add(nextIndex); // Mark this index as resolved
+
+        // Rebuild the text, keeping resolved letters intact
+        const updatedText = originalText.map((char, idx) =>
+          resolvedIndices.has(idx) ? char : randChar()
+        );
+        setDisplayedText(updatedText.join(""));
+      }, 100); // Speed of resolving letters
+
+      setTimeout(() => {
+        clearInterval(interval); // Clear interval if hover ends early
+        setDisplayedText(text); // Reset text if the animation doesn't complete
+      }, originalText.length * 100 + 500); // Animation duration based on text length
+    };
+
+    const element = textRef.current;
+    if (element) {
+      element.addEventListener("pointerover", handleMouseOver);
+    }
+
+    return () => {
+      if (element) {
+        element.removeEventListener("pointerover", handleMouseOver);
+      }
+    };
+  }, [text]);
+
+  // Helper function to generate random characters
+  const randChar = () => {
+
+    const characters = "▒█░!@#$^&*()…æ_█████-=;██/~`";
+    const randomChar =
+      characters[Math.floor(Math.random() * characters.length)];
+    return Math.random() > 0.5 ? randomChar : randomChar.toUpperCase();
   };
 
-  // Function to start the decoding animation
-  const startDecoding = () => {
-    if (isActive) return; // Prevent re-triggering
-    setIsActive(true);
-
-    const characters = text.split("");
-    const remainingIndices: number[] = [];
-
-    // Identify indices that need to be scrambled (exclude spaces)
-    characters.forEach((char, index) => {
-      if (char !== " ") {
-        remainingIndices.push(index);
-      } else {
-        // For spaces, ensure they are set immediately
-        setDecodedText((prev) => {
-          const newDecoded = [...prev];
-          newDecoded[index] = " ";
-          return newDecoded;
-        });
-      }
-    });
-
-    // Start scrambling for non-space characters
-    remainingIndices.forEach((charIndex) => {
-      const interval = setInterval(() => {
-        setDecodedText((prev) => {
-          const newDecoded = [...prev];
-          if (newDecoded[charIndex] !== characters[charIndex]) {
-            newDecoded[charIndex] = getRandomChar();
-          }
-          return newDecoded;
-        });
-      }, scrambleInterval);
-      intervalRefs.current[charIndex] = interval;
-    });
-
-    // Resolve characters at random times within the duration
-    remainingIndices.forEach((charIndex) => {
-      const resolveTime = Math.random() * duration;
-      setTimeout(() => {
-        clearInterval(intervalRefs.current[charIndex]);
-        setDecodedText((prev) => {
-          const newDecoded = [...prev];
-          newDecoded[charIndex] = characters[charIndex];
-          return newDecoded;
-        });
-      }, resolveTime);
-    });
-
-    // Cleanup all intervals after the total duration
-    setTimeout(() => {
-      remainingIndices.forEach((charIndex) => {
-        clearInterval(intervalRefs.current[charIndex]);
-      });
-    }, duration + 100);
+  // Helper function to shuffle an array (Fisher-Yates shuffle)
+  const shuffleArray = (array: number[]) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   };
 
   return (
-    <div className="DecodeText">
-      <button
-        onClick={startDecoding}
-        className="trigger-button"
-        aria-label="Trigger decode effect"
-      >
-        Decode Text
-      </button>
-      <div className="decode-text-wrapper">
-        {decodedText.map((char, index) => (
-          <span
-            key={index}
-            className={`decode-char ${
-              isActive && char === text[index] ? "resolved" : ""
-            }`}
-          >
-            {char || "\u00A0"}
-          </span>
-        ))}
-      </div>
+    <div className="coded-text" ref={textRef}>
+      {displayedText}
     </div>
   );
 };

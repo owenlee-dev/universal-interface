@@ -1,12 +1,18 @@
 import React from "react";
 import "./styles.scss";
 
-type SondereggerButtonProps = { onClick: () => void };
+type SondereggerButtonProps = {
+  children: React.ReactNode;
+  onClick: () => void;
+};
 
-const SondereggerButton: React.FC<SondereggerButtonProps> = ({ onClick }) => {
+const SondereggerButton: React.FC<SondereggerButtonProps> = ({
+  onClick,
+  children,
+}) => {
   return (
     <button className="SondereggerButton" onClick={onClick}>
-      <span>Click Me</span>
+      {children ? children : <span>Click Me</span>}
     </button>
   );
 };

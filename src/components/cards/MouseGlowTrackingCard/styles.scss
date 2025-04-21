@@ -1,0 +1,58 @@
+@import "../../../styles/index.scss";
+
+.MouseGlowTrackingCard {
+  position: relative;
+  background: black;
+  padding: 1rem;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit;
+  > svg {
+    height: 30%;
+    width: 55px;
+    margin-bottom: 1rem;
+    z-index: 1;
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: 1rem;
+    margin-block-end: 0.125em;
+    z-index: 1;
+  }
+
+  p {
+    font-size: 0.875rem;
+    opacity: 0.6;
+    margin: 0;
+    z-index: 1;
+  }
+
+  // GRADIENT ~
+  // BETWEEN CARDS
+  &::after {
+    content: "";
+    position: absolute;
+    background-attachment: fixed;
+    inset: -1px; // create a border between the card and card-content
+    background-image: radial-gradient(
+      circle at var(--x, 0) var(--y, 0),
+      rgba(255, 255, 255, 0.75),
+      transparent 5rem
+    );
+    pointer-events: none;
+    z-index: -1; // LAYER BETWEEN CARD + CARD-CONTENT
+  }
+
+  // GRADIENT ~
+  // WITHIN CARD
+  &:hover {
+    background-attachment: fixed;
+    background-image: radial-gradient(
+      circle at var(--x, 0) var(--y, 0),
+      rgba(255, 255, 255, 0.175),
+      rgba(255, 255, 255, 0.013) 10rem
+    );
+  }
+}

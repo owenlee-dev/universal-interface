@@ -6,6 +6,10 @@ import CoreyDonenfeldButton from "./components/buttons/CoreyDonenfeldButton/Core
 import WipeText from "./components/scroll-events/WipeText/WipeText";
 import DecodeText from "./components/scroll-events/DecodeText/DecodeText";
 import GlowMouseTracking from "./components/cursor-effects/GlowMouseTracking";
+import RisingText from "./components/scroll-events/RisingText/RisingText";
+import { useState } from "react";
+import CompactModal from "./components/modals/CompactModal/CompactModal";
+import SondereggerButton from "./components/buttons/SondereggerButton/SondereggerButton";
 function App() {
   return (
     <div className="App">
@@ -22,7 +26,16 @@ function App() {
         {/* <WipeText text="Hello my name is Owen" /> */}
 
         {/* <DecodeText text="Hello my name is Owen" /> */}
-        <GlowMouseTracking />
+        {/* <GlowMouseTracking /> */}
+        {/* <RisingText
+          text={
+            <h1>
+              Benjamin
+              <br /> Barrile
+            </h1>
+          }
+        /> */}
+        <CompactModal message="Brioche is bad for you?" />
       </div>
     </div>
   );
